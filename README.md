@@ -5,7 +5,7 @@ This project demonstrates how I design an analytics-ready dataset and use SQL to
 ## Business goal
 Understand where conversion drops in the funnel (Ads → Sessions → Events → Orders) and identify opportunities to improve revenue efficiency.
 
-## What this project includes
+## Inside the project
 - Dimensional data model (products, campaigns, customers, dates)
 - Event-based funnel analytics (view → add_to_cart → checkout → purchase)
 - Campaign performance metrics (spend, CTR/CPC, ROAS)
