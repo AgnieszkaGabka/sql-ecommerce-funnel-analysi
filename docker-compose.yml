@@ -1,0 +1,16 @@
+version: "3.9"
+services:
+  db:
+    image: postgres:16
+    container_name: tel_postgres
+    environment:
+      POSTGRES_USER: tel_user
+      POSTGRES_PASSWORD: tel_pass
+      POSTGRES_DB: tel_analytics
+    ports:
+      - "5432:5432"
+    volumes:
+      - tel_pgdata:/var/lib/postgresql/data
+
+volumes:
+  tel_pgdata:
