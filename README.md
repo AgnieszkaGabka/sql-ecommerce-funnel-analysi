@@ -21,3 +21,6 @@ SQL (PostgreSQL or SQLite), CSV seeds, clear documentation in /docs.
 
 ## Repository structure
 See folder layout below.
+
+Google Ads clicks are based on a real export (daily time series).
+Impressions and cost are simulated in an extended dataset to enable time-series and performance analysis.
