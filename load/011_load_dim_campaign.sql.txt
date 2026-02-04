@@ -1,0 +1,9 @@
+-- Load dim_campaign from staging_google_ads
+
+INSERT INTO dim_campaign (campaign_name)
+SELECT DISTINCT s.campaign_name
+FROM staging_google_ads s
+LEFT JOIN dim_campaign d
+  ON d.campaign_name = s.campaign_name
+WHERE s.campaign_name IS NOT NULL
+  AND d.campaign_name IS NULL;

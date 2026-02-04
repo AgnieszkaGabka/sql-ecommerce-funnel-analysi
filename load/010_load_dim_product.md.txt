@@ -1,0 +1,10 @@
+# Load dim_product
+
+dim_product was loaded using DBeaver Import Data (CSV → table).
+
+Source file:
+- data_seed/dim_product.csv
+
+Note:
+In a production-grade pipeline, this step would be automated
+(e.g. COPY command or ETL job).

@@ -1,0 +1,17 @@
+product_name,product_type,category,price,currency,is_active
+Cut Your Meetings by 30%,tripwire,Tripwire,19,USD,true
+7-Day Delegation System,tripwire,Tripwire,19,USD,true
+EA Multiplier System,tripwire,Tripwire,19,USD,true
+Ownership Architecture,tripwire,Tripwire,29,USD,true
+The Efficient Leader,core,Core Product,89,USD,true
+The Decisive Leader,core,Core Product,99,USD,true
+Leadership Clarity Accelerator,core,Core Product,119,USD,true
+Executive Performance Advantage,core,Core Product,149,USD,true
+Leader Essentials Toolkit,toolkit,Toolkit,169,USD,true
+The Leadership Essentials Bundle,bundle,Bundle,49,USD,true
+The Decision Plus Ownership System,bundle,Bundle,99,USD,true
+The High Performance Leadership Duo,bundle,Bundle,199,USD,true
+The Starter Plus Toolkit Bundle,bundle,Bundle,189,USD,true
+The Clarity Plus Execution Bundle,bundle,Bundle,269,USD,true
+The Leadership Transformation Bundle,bundle,Bundle,329,USD,true
+The Excellence Operating System Bundle,bundle,Bundle,449,USD,true 
