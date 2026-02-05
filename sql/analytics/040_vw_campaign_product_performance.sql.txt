@@ -1,0 +1,50 @@
+/* ============================================================
+   VIEW: vw_campaign_product_performance
+   Purpose:
+   Unified analytical layer combining:
+   - ad spend facts
+   - campaign metadata
+   - product pricing
+   - simulated revenue attribution
+
+   This view is the base for all KPI and business analysis.
+   ============================================================ */
+
+CREATE OR REPLACE VIEW vw_campaign_product_performance AS
+SELECT
+  d.date_key,
+  c.campaign_id,
+  c.campaign_name,
+  p.product_id,
+  p.product_name,
+  p.product_type,
+  p.category,
+  p.price,
+  SUM(f.impressions) AS impressions,
+  SUM(f.clicks) AS clicks,
+  SUM(f.cost) AS cost,
+  SUM(f.conversions) AS purchases,
+  SUM(f.conversions) * p.price * b.allocation_weight AS revenue,
+  ROUND(SUM(f.clicks)::numeric / NULLIF(SUM(f.impressions),0), 4) AS ctr,
+  ROUND(SUM(f.cost) / NULLIF(SUM(f.clicks),0), 2) AS cpc,
+  ROUND(SUM(f.cost) / NULLIF(SUM(f.conversions),0), 2) AS cpa,
+  ROUND(
+    (SUM(f.conversions) * p.price * b.allocation_weight)
+    / NULLIF(SUM(f.cost),0),
+    2
+  ) AS roas
+FROM fact_ad_spend f
+JOIN dim_date d ON d.date_key = f.date_key
+JOIN dim_campaign c ON c.campaign_id = f.campaign_id
+JOIN bridge_campaign_product b ON b.campaign_id = c.campaign_id
+JOIN dim_product p ON p.product_id = b.product_id
+GROUP BY
+  d.date_key,
+  c.campaign_id,
+  c.campaign_name,
+  p.product_id,
+  p.product_name,
+  p.product_type,
+  p.category,
+  p.price,
+  b.allocation_weight;

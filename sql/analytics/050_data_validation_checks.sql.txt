@@ -1,0 +1,68 @@
+/* ============================================================
+   DATA VALIDATION & QUALITY CHECKS
+   Purpose:
+   Basic sanity checks to ensure analytical correctness
+   of campaign-product performance data.
+   ============================================================ */
+
+---------------------------------------------------------------
+-- 1. Check: campaigns without product mapping
+-- Expectation: 0 rows
+---------------------------------------------------------------
+
+SELECT
+  c.campaign_id,
+  c.campaign_name
+FROM dim_campaign c
+LEFT JOIN bridge_campaign_product b
+  ON b.campaign_id = c.campaign_id
+WHERE b.campaign_id IS NULL;
+
+
+---------------------------------------------------------------
+-- 2. Check: fact records without matching date dimension
+-- Expectation: 0 rows
+---------------------------------------------------------------
+
+SELECT
+  f.date_key
+FROM fact_ad_spend f
+LEFT JOIN dim_date d
+  ON d.date_key = f.date_key
+WHERE d.date_key IS NULL;
+
+
+---------------------------------------------------------------
+-- 3. Check: negative or zero cost values
+-- Expectation: 0 rows
+---------------------------------------------------------------
+
+SELECT *
+FROM fact_ad_spend
+WHERE cost < 0;
+
+
+---------------------------------------------------------------
+-- 4. Check: negative conversion values
+-- Expectation: 0 rows
+---------------------------------------------------------------
+
+SELECT *
+FROM fact_ad_spend
+WHERE conversions < 0;
+
+
+---------------------------------------------------------------
+-- 5. Check: revenue consistency (no revenue with zero purchases)
+-- Expectation: 0 rows
+---------------------------------------------------------------
+
+SELECT *
+FROM vw_campaign_product_performance
+WHERE revenue > 0
+  AND purchases = 0;
+
+
+---------------------------------------------------------------
+-- 6. Row count overview (informational)
+--------------------------------------

@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS dim_campaign (
+  campaign_id    SERIAL PRIMARY KEY,
+  campaign_name  TEXT UNIQUE NOT NULL
+);

@@ -1,0 +1,9 @@
+CREATE TABLE IF NOT EXISTS fact_ad_spend (
+  date_key      DATE NOT NULL REFERENCES dim_date(date_key),
+  campaign_id   INT  NOT NULL REFERENCES dim_campaign(campaign_id),
+  impressions   INT  NOT NULL,
+  clicks        INT  NOT NULL,
+  cost          NUMERIC(12,2) NOT NULL,
+  conversions   INT  NOT NULL,
+  PRIMARY KEY (date_key, campaign_id)
+);

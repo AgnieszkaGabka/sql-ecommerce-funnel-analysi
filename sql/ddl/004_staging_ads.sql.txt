@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS staging_google_ads (
+  date           DATE,
+  campaign_name  TEXT,
+  impressions    INT,
+  clicks         INT,
+  cost           NUMERIC(12,2),
+  conversions    INT
+);

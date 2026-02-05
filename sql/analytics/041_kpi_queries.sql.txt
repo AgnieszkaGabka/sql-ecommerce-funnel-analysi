@@ -1,0 +1,54 @@
+/* =====================================================
+   KPI ANALYSIS — CAMPAIGN & PRODUCT PERFORMANCE
+   Source: vw_campaign_product_performance
+   ===================================================== */
+
+/* -----------------------------------------------------
+   SECTION 1: Campaign performance
+   Question:
+   - Which campaigns generate the highest ROAS?
+----------------------------------------------------- */
+
+SELECT
+  campaign_name,
+  SUM(cost) AS cost,
+  SUM(purchases) AS purchases,
+  SUM(revenue) AS revenue,
+  ROUND(SUM(revenue) / NULLIF(SUM(cost),0), 2) AS roas
+FROM vw_campaign_product_performance
+GROUP BY campaign_name
+HAVING SUM(cost) > 0
+ORDER BY roas DESC;
+
+
+/* -----------------------------------------------------
+   SECTION 2: Product performance
+   Question:
+   - Which products generate the highest revenue?
+----------------------------------------------------- */
+
+SELECT
+  product_name,
+  SUM(cost) AS cost,
+  SUM(purchases) AS purchases,
+  SUM(revenue) AS revenue,
+  ROUND(SUM(revenue) / NULLIF(SUM(cost),0), 2) AS roas
+FROM vw_campaign_product_performance
+GROUP BY product_name
+ORDER BY revenue DESC;
+
+
+/* -----------------------------------------------------
+   SECTION 3: Daily trends
+   Question:
+   - How do cost and revenue evolve over time?
+----------------------------------------------------- */
+
+SELECT
+  date_key,
+  SUM(cost) AS cost,
+  SUM(revenue) AS revenue,
+  ROUND(SUM(revenue) / NULLIF(SUM(cost),0), 2) AS roas
+FROM vw_campaign_product_performance
+GROUP BY date_key
+ORDER BY date_key;
