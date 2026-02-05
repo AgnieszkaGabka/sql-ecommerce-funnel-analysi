@@ -1,0 +1,19 @@
+INSERT INTO fact_ad_spend (date_key, campaign_id, impressions, clicks, cost, conversions)
+SELECT
+  s.date AS date_key,
+  c.campaign_id,
+  COALESCE(s.impressions, 0),
+  COALESCE(s.clicks, 0),
+  COALESCE(s.cost, 0),
+  COALESCE(s.conversions, 0)
+FROM staging_google_ads s
+JOIN dim_campaign c
+  ON c.campaign_name = s.campaign_name
+JOIN dim_date d
+  ON d.date_key = s.date
+ON CONFLICT (date_key, campaign_id) DO UPDATE
+SET
+  impressions = EXCLUDED.impressions,
+  clicks = EXCLUDED.clicks,
+  cost = EXCLUDED.cost,
+  conversions = EXCLUDED.conversions;
