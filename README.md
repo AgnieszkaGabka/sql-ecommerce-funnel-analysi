@@ -74,3 +74,7 @@ Steps:
 ## Next Steps (Planned)
 - Write a structured analytical report with risks, limitations, correlations, and recommendations (TCBA-aligned).
 - Add a concise PDF portfolio version of the report for CV attachments.
+- 
+## Business Analysis Report
+The project includes a full Business Analysis report (PDF) summarizing the analytical approach, key findings, assumptions, and decision implications.
+The report is intended for non-technical stakeholders and demonstrates how analytical insights were translated into business-relevant conclusions.
